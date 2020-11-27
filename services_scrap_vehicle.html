@@ -39,6 +39,27 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script>
+	function send(e, form) {
+		fetch(form.action, { method: 'post', body: new FormData(form) });
+
+		console.log('We send post asynchronously (AJAX)');
+		e.preventDefault();
+		document.request.reset();
+		var x = document.getElementById("scrapRequest");
+
+		if (x.style.display
+			=== "none") {
+			x.style.display = "block";
+		} else {
+			x.style.display =
+				"none";
+		}
+		setTimeout(function () {
+			$('#scrapRequest').fadeOut('fast');
+		}, 3000);
+	}
+</script>
 </head>
 
 <body>
@@ -127,11 +148,12 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-1"></div>
-					<div class="col-lg-8">
-						<c:if test="${not empty message}">
-							<h5 align="center" style="color: green">${message}</h5>
-						</c:if>
-						<br>
+					<div class="col-lg-8" style="text-align: center;">
+						<div id="scrapRequest" style="display:none">
+							<!-- You can customize the thankyou message by editing the code below -->
+							<h5><em>Thanks</em>for Scrap request ! We will get back to you soon!
+							</h2>
+						</div><br>
 					</div>
 
 				</div>
@@ -139,8 +161,9 @@
 				<div class="row" data-aos="fade-up">
 
 					<div class="col-lg-10">
-						<form action="scrapVehicleRequest" method="post">
-							<div class="form-row">
+						<form action="https://script.google.com/macros/s/AKfycbyKfgtAhv1IA841TugOOhEjOZvTVw7lzGmeFOpz/exec" method="post" onsubmit="send(event,this)" name="request" role="form">
+							
+						<div class="form-row">
 								<div class="col-md-6 form-group">
 									<input type="text" name="name" class="form-control" id="name"
 										required placeholder="Your full Name" data-rule="minlen:4"
@@ -169,7 +192,7 @@
 									<div class="validate"></div>
 								</div>
 								<div class="col-md-6 form-group">
-									<input type="text" class="form-control" name="date" id="date"
+									<input type="text" class="form-control" name="pickupDate" id="date"
 										placeholder="mm/dd/yyyy Date available for pickup" required />
 									<div class="validate"></div>
 								</div>
@@ -289,6 +312,7 @@
 
 	<!-- Template Main JS File -->
 	<script src="assets/js/main.js"></script>
+	<script data-cfasync="false" type="text/javascript" src="form-submission-handler.js"></script>
 
 </body>
 
